@@ -22,4 +22,10 @@ Acc1.current_status_display() # current status of account
 Acc1.diposit(100000) # amount deposit
 Acc1.withdraw(200000) #amount wothrwal
 
+print("--------------------------------------")
+print("--------------------------------------")
 
+Acc2 = Account(19104915, "Jatin", 1500000)
+Acc2.current_status_display() # current status of account
+Acc2.diposit(302045) # amount deposit
+Acc2.withdraw(104824) #amount wothrwal
