@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Account App</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; text-align: center; }
+        .container { margin: 50px auto; padding: 20px; background: white; border-radius: 10px; width: 450px; box-shadow: 0 0 10px #aaa; }
+        input, select { padding: 10px; width: 250px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; border: none; border-radius: 5px; }
+        button.deposit { background: #28a745; color: white; }
+        button.withdraw { background: #dc3545; color: white; }
+        button.select { background: #007bff; color: white; }
+        .message { margin-top: 15px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bank Account Management</h2>
+
+        <!-- Account Selection -->
+        <form action="/select" method="post">
+            <select name="accno" required>
+                <option value="">-- Select Account --</option>
+                {% for accno, acc in accounts.items() %}
+                    <option value="{{ accno }}" {% if selected and selected.accno == accno %}selected{% endif %}>
+                        {{ acc.accno }} - {{ acc.acc_holder_name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="select">Select Account</button>
+        </form>
+
+        {% if selected %}
+            <hr>
+            <p><b>Account No:</b> {{ selected.accno }}</p>
+            <p><b>Holder:</b> {{ selected.acc_holder_name }}</p>
+            <p><b>Balance:</b> {{ selected.balance }} Rs.</p>
+
+            {% if message %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+
+            <!-- Deposit -->
+            <form action="/deposit" method="post">
+                <input type="hidden" name="accno" value="{{ selected.accno }}">
+                <input type="number" name="amount" placeholder="Enter Deposit Amount" required>
+                <button type="submit" class="deposit">Deposit</button>
+            </form>
+
+            <!-- Withdraw -->
+            <form action="/withdraw" method="post">
+                <input type="hidden" name="accno" value="{{ selected.accno }}">
+                <input type="number" name="amount" placeholder="Enter Withdraw Amount" required>
+                <button type="submit" class="withdraw">Withdraw</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
+
