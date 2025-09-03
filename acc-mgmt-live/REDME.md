@@ -34,7 +34,7 @@ git clone <your-repo-url>
 cd acc-mgmt-live
 ```
 
-### 2️⃣ Create Virtual Environment (Recommended)
+### 2️⃣ Create Virtual Environment (When using WSL)
 ```bash
 python -m venv venv
 ```
